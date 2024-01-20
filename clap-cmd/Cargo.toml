@@ -1,0 +1,21 @@
+[package]
+name = "clap-cmd"
+version = "0.1.0"
+edition = "2021"
+
+default-run = "clap-cmd"
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+ansi_term = "0.12.1"
+clap = { version = "4.4.18", features = ["cargo"] }
+crossbeam = "0.8.4"
+crossbeam-channel = "0.5.11"
+error-chain = { version = "0.12.4", features = ["backtrace"] }
+flate2 = "1.0.28"
+image = "0.24.8"
+num = "0.4.1"
+num_cpus = "1.16.0"
+rusqlite = "0.30.0"
+tar = "0.4.40"
+threadpool = "1.8.1"
