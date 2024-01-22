@@ -19,3 +19,6 @@ num_cpus = "1.16.0"
 rusqlite = "0.30.0"
 tar = "0.4.40"
 threadpool = "1.8.1"
+
+[lints.rust]
+dead_code = "allow"

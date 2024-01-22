@@ -74,22 +74,55 @@ fn main() {
 }
 
 fn connect() -> Result<(), IoError> {
-    let conn = Connection::open("dog.db")?;
+    let conn = Connection::open("dogs.db")?;
     conn.execute(
-        "create table if not exists cat_colors (
+        "create table if not exists dog_colors (
             id integer primary key,
             name text not null unique
         )",
         params![],
     )?;
     conn.execute(
-        "create table if not exists cats (
+        "create table if not exists dogs (
             id integer primary key,
             name text not null,
-            color_id integer not null references cat_colors(id)
+            color_id integer not null references dog_colors(id)
         )",
         params![],
     )?;
+
+    let dogs = HashMap::from([
+        (String::from("Yellow"), vec!["Puppy", "Stone"]),
+        (String::from("Prink"), vec!["Doggy", "Piggy"]),
+    ]);
+
+    for (color, dogname) in &dogs {
+        conn.execute("INSERT INTO dog_colors (name) values (?1)", params![color])?;
+
+        let last_id = conn.last_insert_rowid().to_string();
+
+        for cat in dogname {
+            conn.execute(
+                "INSERT INTO dogs (name, color_id) values (?1, ?2)",
+                params![&cat, &last_id],
+            )?;
+        }
+    }
+
+    let mut stmt = conn.prepare(
+        "SELECT c.name, cc.name from dogs c INNER JOIN dog_colors cc ON cc.id = c.color_id",
+    )?;
+
+    let dogs = stmt.query_map(params![], |row| {
+        Ok(Dog {
+            name: row.get(0)?,
+            color: row.get(1)?,
+        })
+    })?;
+
+    for dog in dogs {
+        println!("Found Dog {:?}", dog);
+    }
     Ok(())
 }
 
@@ -107,6 +140,12 @@ impl From<rusqlite::Error> for IoError {
     fn from(value: rusqlite::Error) -> Self {
         IoError(value.to_string())
     }
+}
+
+#[derive(Debug)]
+struct Dog {
+    name: String,
+    color: String,
 }
 
 #[derive(Debug)]
