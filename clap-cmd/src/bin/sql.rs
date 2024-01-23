@@ -29,9 +29,10 @@ fn main() {
         ]);
 
         for (color, catnames) in &cat_colors {
-            if let Err(result) =
-                conn.execute("INSERT INTO cat_colors (name) values (?1)", &[&color])
-            {
+            if let Err(result) = conn.execute(
+                "INSERT OR IGNORE INTO cat_colors (name) values (?1)",
+                &[&color],
+            ) {
                 println!("插入失败: {}", result);
             }
             let last_id = conn.last_insert_rowid().to_string();
@@ -97,8 +98,18 @@ fn connect() -> Result<(), IoError> {
     ]);
 
     for (color, dogname) in &dogs {
-        conn.execute("INSERT INTO dog_colors (name) values (?1)", params![color])?;
+        conn.execute(
+            "INSERT OR IGNORE INTO dog_colors (name) values (?1)",
+            params![color],
+        )?;
+        // conn.execute(
 
+        //     "
+        //     INSERT INTO dog_colors (name) values (?1) WHERE NOT EXISTS (
+        //         SELECT * FROM dog_colors WHERE name = (?1)
+        //     )",
+        //     params![color]
+        // )?;
         let last_id = conn.last_insert_rowid().to_string();
 
         for cat in dogname {
