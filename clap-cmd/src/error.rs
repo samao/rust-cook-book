@@ -5,7 +5,7 @@ use std::fmt::Display;
  * @Author: idzeir
  * @Date: 2024-01-23 14:53:21
  * @Last Modified by: idzeir
- * @Last Modified time: 2024-01-24 17:14:09
+ * @Last Modified time: 2024-01-24 17:19:30
  */
 #[derive(Debug)]
 pub struct MYError(String);

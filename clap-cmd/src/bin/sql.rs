@@ -3,7 +3,7 @@
  * @Author: idzeir
  * @Date: 2024-01-24 17:02:50
  * @Last Modified by: idzeir
- * @Last Modified time: 2024-01-24 17:15:03
+ * @Last Modified time: 2024-01-24 17:52:03
  */
 use rusqlite::{params, Connection};
 use std::collections::HashMap;
@@ -93,7 +93,7 @@ fn connect() -> clap_cmd::Result<()> {
     conn.execute(
         "create table if not exists dogs (
             id integer primary key,
-            name text not null,
+            name text not null unique,
             color_id integer not null references dog_colors(id)
         )",
         params![],
@@ -102,6 +102,7 @@ fn connect() -> clap_cmd::Result<()> {
     let dogs = HashMap::from([
         (String::from("Yellow"), vec!["Puppy", "Stone"]),
         (String::from("Prink"), vec!["Doggy", "Piggy"]),
+        (String::from("Green"), vec!["Nash", "Nobo"]),
     ]);
 
     for (color, dogname) in &dogs {
@@ -121,7 +122,7 @@ fn connect() -> clap_cmd::Result<()> {
 
         for cat in dogname {
             conn.execute(
-                "INSERT INTO dogs (name, color_id) values (?1, ?2)",
+                "INSERT OR IGNORE INTO dogs (name, color_id) values (?1, ?2)",
                 params![&cat, &last_id],
             )?;
         }
