@@ -1,5 +1,12 @@
+/*
+ * Copyright (c) QieTv, Inc. 2018
+ * @Author: idzeir
+ * @Date: 2024-01-24 17:02:50
+ * @Last Modified by: idzeir
+ * @Last Modified time: 2024-01-24 17:15:03
+ */
 use rusqlite::{params, Connection};
-use std::{collections::HashMap, fmt::Display};
+use std::collections::HashMap;
 
 fn main() {
     if let Ok(conn) = Connection::open("cats.db") {
@@ -74,7 +81,7 @@ fn main() {
     }
 }
 
-fn connect() -> Result<(), IoError> {
+fn connect() -> clap_cmd::Result<()> {
     let conn = Connection::open("dogs.db")?;
     conn.execute(
         "create table if not exists dog_colors (
@@ -134,23 +141,12 @@ fn connect() -> Result<(), IoError> {
     for dog in dogs {
         println!("Found Dog {:?}", dog);
     }
+    test_error()?;
     Ok(())
 }
 
-#[derive(Debug)]
-struct IoError(String);
-
-impl std::error::Error for IoError {}
-impl Display for IoError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "Io Error: {}", self.0)
-    }
-}
-
-impl From<rusqlite::Error> for IoError {
-    fn from(value: rusqlite::Error) -> Self {
-        IoError(value.to_string())
-    }
+fn test_error() -> clap_cmd::Result<()> {
+    Err("GOOOOOD".into())
 }
 
 #[derive(Debug)]

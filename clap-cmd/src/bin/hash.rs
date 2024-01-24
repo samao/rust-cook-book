@@ -101,7 +101,6 @@ fn encrypt() -> clap_cmd::Result<()> {
         password.as_bytes(),
         &mut pbkdf2_hash,
     );
-
     println!("Salt: {}", HEXUPPER.encode(&salt));
     println!("PBKDF2 hash: {}", HEXUPPER.encode(&pbkdf2_hash));
 
