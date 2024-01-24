@@ -3,7 +3,7 @@
  * @Author: idzeir
  * @Date: 2024-01-23 15:21:48
  * @Last Modified by: idzeir
- * @Last Modified time: 2024-01-23 15:43:47
+ * @Last Modified time: 2024-01-23 15:58:14
  */
 use std::{
     fs::File,
@@ -23,10 +23,18 @@ fn main() -> clap_cmd::Result<()> {
     let mut output = File::create(path)?;
     write!(output, "We will generate a digest of this text")?;
     let input = File::open(path)?;
-    let reader = BufReader::new(input);
-    let digest = sha256_digest(reader)?;
+    let mut reader = BufReader::new(input);
+    let digest = sha256_digest(&mut reader)?;
+    let digest_full = sha256_digest_full(&mut reader)?;
 
-    println!("SHA-256 digest is {}", HEXUPPER.encode(digest.as_ref()));
+    println!(
+        "SHA-256 digest 1024 is {}",
+        HEXUPPER.encode(digest.as_ref())
+    );
+    println!(
+        "SHA-256 digest full is {}",
+        HEXUPPER.encode(digest_full.as_ref())
+    );
 
     // hmac 签名验证
     let mut key_value = [0u8; 48];
@@ -49,10 +57,12 @@ fn main() -> clap_cmd::Result<()> {
     Ok(())
 }
 
-fn sha256_digest<R: Read>(mut reader: R) -> clap_cmd::Result<Digest> {
+// 1024 bytes hash
+fn sha256_digest<R: Read>(reader: &mut R) -> clap_cmd::Result<Digest> {
     let mut context = Context::new(&SHA256);
-    let mut buf = [0; 1024];
 
+    let mut buf = [0; 1024];
+    // println!("before: {:?}", buf);
     loop {
         let count = reader.read(&mut buf)?;
         if count == 0 {
@@ -60,6 +70,17 @@ fn sha256_digest<R: Read>(mut reader: R) -> clap_cmd::Result<Digest> {
         }
         context.update(&buf[..count]);
     }
+    // println!("after: {:?}", buf);
+    Ok(context.finish())
+}
+
+// full bytes hash
+fn sha256_digest_full<R: Read>(reader: &mut R) -> clap_cmd::Result<Digest> {
+    let mut context = Context::new(&SHA256);
+
+    let mut data = vec![];
+    let _ = reader.read_to_end(&mut data)?;
+    context.update(&data[..]);
     Ok(context.finish())
 }
 
