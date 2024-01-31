@@ -6,6 +6,7 @@
  * @Last Modified time: 2024-01-23 15:58:14
  */
 use std::{
+    error::Error,
     fs::File,
     io::{BufReader, Read, Write},
     num::NonZeroU32,
@@ -54,7 +55,26 @@ fn main() -> clap_cmd::Result<()> {
 
     encrypt()?;
 
+    if let Ok(err) = read_count("count.txt") {
+        println!("读取计数={:#010X}", err);
+
+        let a = 0xF34123;
+        let b = format!("{:#010X}", a);
+        println!("CURRENT: {}", b);
+    } else {
+        println!("读取技术失败");
+    }
+
     Ok(())
+}
+
+fn read_count(path: &str) -> Result<i64, Box<dyn Error>> {
+    let mut file = File::create(path)?;
+    write!(file, "998736")?;
+    let mut count = String::new();
+    File::open(path)?.read_to_string(&mut count)?;
+    let count = count.parse::<i64>()?;
+    Ok(count)
 }
 
 // 1024 bytes hash

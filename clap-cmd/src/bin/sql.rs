@@ -142,6 +142,7 @@ fn connect() -> clap_cmd::Result<()> {
     for dog in dogs {
         println!("Found Dog {:?}", dog);
     }
+    clap_cmd::error::say();
     test_error()?;
     Ok(())
 }

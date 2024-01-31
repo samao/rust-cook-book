@@ -8,6 +8,8 @@ default-run = "clap-cmd"
 
 [dependencies]
 ansi_term = "0.12.1"
+bitflags = "2.4.2"
+chrono = "0.4.33"
 clap = { version = "4.4.18", features = ["cargo"] }
 crossbeam = "0.8.4"
 crossbeam-channel = "0.5.11"
