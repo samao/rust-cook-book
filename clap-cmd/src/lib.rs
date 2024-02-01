@@ -7,4 +7,4 @@
  */
 pub mod error;
 
-pub type Result<T> = core::result::Result<T, error::MYError>;
+pub type Result<T> = core::result::Result<T, error::MyError>;

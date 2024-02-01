@@ -8,44 +8,57 @@ use std::fmt::{Debug, Display};
  * @Last Modified time: 2024-01-31 14:41:45
  */
 #[derive(Debug)]
-pub struct MYError(String);
+pub struct MyError(String);
 
-impl std::error::Error for MYError {}
+impl std::error::Error for MyError {}
 
-impl Display for MYError {
+impl Display for MyError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(f, "MYERROR: {}", self.0)
     }
 }
 
-impl From<&str> for MYError {
+impl From<&str> for MyError {
     fn from(value: &str) -> Self {
-        MYError(value.to_owned())
+        MyError(value.to_owned())
     }
 }
 
-impl From<std::io::Error> for MYError {
+impl From<std::io::Error> for MyError {
     fn from(value: std::io::Error) -> Self {
-        MYError(value.to_string())
+        MyError(value.to_string())
     }
 }
 
-impl From<ring::error::Unspecified> for MYError {
+impl From<ring::error::Unspecified> for MyError {
     fn from(value: ring::error::Unspecified) -> Self {
-        MYError(value.to_string())
+        MyError(value.to_string())
     }
 }
 
-impl From<rusqlite::Error> for MYError {
+impl From<rusqlite::Error> for MyError {
     fn from(value: rusqlite::Error) -> Self {
-        MYError(value.to_string())
+        MyError(value.to_string())
     }
 }
-impl From<chrono::ParseError> for MYError {
+impl From<chrono::ParseError> for MyError {
     fn from(value: chrono::ParseError) -> Self {
-        MYError(value.to_string())
+        MyError(value.to_string())
     }
 }
+
+impl From<log::SetLoggerError> for MyError {
+    fn from(value: log::SetLoggerError) -> Self {
+        MyError(value.to_string())
+    }
+}
+
+impl From<Box<String>> for MyError {
+    fn from(value: Box<String>) -> Self {
+        MyError(*value)
+    }
+}
+
 trait Walk {
     /// GUUUO
     fn walk(&self) {

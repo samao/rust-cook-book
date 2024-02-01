@@ -12,20 +12,22 @@ fn execute_query(query: &str) {
 }
 
 //RUST_LOG=debug cargo run --bin debugging
-fn main() {
+fn main() -> clap_cmd::Result<()> {
     // 1.自定义logger
-    if let Err(err) = console_init() {
-        println!("日志启动失败: {}", err);
-    }
+    console_init()?;
 
     //2. env_logger::init();
     // 下面保留error
     //3. Builder::new().target(Target::Stdout).init();
     execute_query("Drop Table Students");
 
-    if let Err(err) = execute_query_error("Drop Tbody students.") {
-        log::error!("Failed to execute query: {}", err);
-    }
+    // if let Err(err) = execute_query_error("Drop Tbody students.") {
+    //     log::error!("Failed to execute query: {}", err);
+    // }
+
+    execute_query_error("Drop Tbody students.")?;
+
+    Ok(())
 }
 
 fn console_init() -> Result<(), SetLoggerError> {
