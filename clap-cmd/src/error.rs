@@ -1,4 +1,7 @@
-use std::fmt::{Debug, Display};
+use std::{
+    ffi::NulError,
+    fmt::{Debug, Display},
+};
 
 /*
  * Copyright (c) QieTv, Inc. 2018
@@ -56,6 +59,12 @@ impl From<log::SetLoggerError> for MyError {
 impl From<Box<String>> for MyError {
     fn from(value: Box<String>) -> Self {
         MyError(*value)
+    }
+}
+
+impl From<NulError> for MyError {
+    fn from(value: NulError) -> Self {
+        MyError(value.to_string())
     }
 }
 

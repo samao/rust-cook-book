@@ -2,9 +2,12 @@
 name = "clap-cmd"
 version = "0.1.0"
 edition = "2021"
+build = "build.rs"
 
 default-run = "clap-cmd"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[build-dependencies]
+cc = "1.0.83"
 
 [dependencies]
 ansi_term = "0.12.1"
