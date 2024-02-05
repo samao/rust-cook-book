@@ -1,0 +1,154 @@
+cargo:rerun-if-env-changed=BUILD
+cargo:rerun-if-changed=src/hello.c
+TARGET = Some("x86_64-apple-darwin")
+OPT_LEVEL = Some("0")
+HOST = Some("x86_64-apple-darwin")
+cargo:rerun-if-env-changed=CC_x86_64-apple-darwin
+CC_x86_64-apple-darwin = None
+cargo:rerun-if-env-changed=CC_x86_64_apple_darwin
+CC_x86_64_apple_darwin = None
+cargo:rerun-if-env-changed=HOST_CC
+HOST_CC = None
+cargo:rerun-if-env-changed=CC
+CC = None
+cargo:rerun-if-env-changed=CRATE_CC_NO_DEFAULTS
+CRATE_CC_NO_DEFAULTS = None
+DEBUG = Some("true")
+CARGO_CFG_TARGET_FEATURE = Some("cmpxchg16b,fxsr,sse,sse2,sse3,sse4.1,ssse3")
+cargo:rerun-if-env-changed=CFLAGS_x86_64-apple-darwin
+CFLAGS_x86_64-apple-darwin = None
+cargo:rerun-if-env-changed=CFLAGS_x86_64_apple_darwin
+CFLAGS_x86_64_apple_darwin = None
+cargo:rerun-if-env-changed=HOST_CFLAGS
+HOST_CFLAGS = None
+cargo:rerun-if-env-changed=CFLAGS
+CFLAGS = None
+running: env -u IPHONEOS_DEPLOYMENT_TARGET "cc" "-O0" "-ffunction-sections" "-fdata-sections" "-fPIC" "-gdwarf-2" "-fno-omit-frame-pointer" "-m64" "-arch" "x86_64" "-Wall" "-Wextra" "-o" "/Users/qietv/git/rust/cookbook/build-c/target/debug/build/build-c-158160e484c1cdb8/out/src/hello.o" "-c" "src/hello.c"
+exit status: 0
+cargo:rerun-if-env-changed=AR_x86_64-apple-darwin
+AR_x86_64-apple-darwin = None
+cargo:rerun-if-env-changed=AR_x86_64_apple_darwin
+AR_x86_64_apple_darwin = None
+cargo:rerun-if-env-changed=HOST_AR
+HOST_AR = None
+cargo:rerun-if-env-changed=AR
+AR = None
+cargo:rerun-if-env-changed=ARFLAGS_x86_64-apple-darwin
+ARFLAGS_x86_64-apple-darwin = None
+cargo:rerun-if-env-changed=ARFLAGS_x86_64_apple_darwin
+ARFLAGS_x86_64_apple_darwin = None
+cargo:rerun-if-env-changed=HOST_ARFLAGS
+HOST_ARFLAGS = None
+cargo:rerun-if-env-changed=ARFLAGS
+ARFLAGS = None
+running: ZERO_AR_DATE="1" "ar" "cq" "/Users/qietv/git/rust/cookbook/build-c/target/debug/build/build-c-158160e484c1cdb8/out/libhelloc.a" "/Users/qietv/git/rust/cookbook/build-c/target/debug/build/build-c-158160e484c1cdb8/out/src/hello.o"
+exit status: 0
+running: "ar" "s" "/Users/qietv/git/rust/cookbook/build-c/target/debug/build/build-c-158160e484c1cdb8/out/libhelloc.a"
+exit status: 0
+cargo:rustc-link-lib=static=helloc
+cargo:rustc-link-search=native=/Users/qietv/git/rust/cookbook/build-c/target/debug/build/build-c-158160e484c1cdb8/out
+cargo:rerun-if-changed=src/hello.cpp
+TARGET = Some("x86_64-apple-darwin")
+OPT_LEVEL = Some("0")
+HOST = Some("x86_64-apple-darwin")
+cargo:rerun-if-env-changed=CXX_x86_64-apple-darwin
+CXX_x86_64-apple-darwin = None
+cargo:rerun-if-env-changed=CXX_x86_64_apple_darwin
+CXX_x86_64_apple_darwin = None
+cargo:rerun-if-env-changed=HOST_CXX
+HOST_CXX = None
+cargo:rerun-if-env-changed=CXX
+CXX = None
+cargo:rerun-if-env-changed=CRATE_CC_NO_DEFAULTS
+CRATE_CC_NO_DEFAULTS = None
+DEBUG = Some("true")
+CARGO_CFG_TARGET_FEATURE = Some("cmpxchg16b,fxsr,sse,sse2,sse3,sse4.1,ssse3")
+cargo:rerun-if-env-changed=CXXFLAGS_x86_64-apple-darwin
+CXXFLAGS_x86_64-apple-darwin = None
+cargo:rerun-if-env-changed=CXXFLAGS_x86_64_apple_darwin
+CXXFLAGS_x86_64_apple_darwin = None
+cargo:rerun-if-env-changed=HOST_CXXFLAGS
+HOST_CXXFLAGS = None
+cargo:rerun-if-env-changed=CXXFLAGS
+CXXFLAGS = None
+running: env -u IPHONEOS_DEPLOYMENT_TARGET "c++" "-O0" "-ffunction-sections" "-fdata-sections" "-fPIC" "-gdwarf-2" "-fno-omit-frame-pointer" "-m64" "-arch" "x86_64" "-Wall" "-Wextra" "-o" "/Users/qietv/git/rust/cookbook/build-c/target/debug/build/build-c-158160e484c1cdb8/out/src/hello.o" "-c" "src/hello.cpp"
+exit status: 0
+cargo:rerun-if-env-changed=AR_x86_64-apple-darwin
+AR_x86_64-apple-darwin = None
+cargo:rerun-if-env-changed=AR_x86_64_apple_darwin
+AR_x86_64_apple_darwin = None
+cargo:rerun-if-env-changed=HOST_AR
+HOST_AR = None
+cargo:rerun-if-env-changed=AR
+AR = None
+cargo:rerun-if-env-changed=ARFLAGS_x86_64-apple-darwin
+ARFLAGS_x86_64-apple-darwin = None
+cargo:rerun-if-env-changed=ARFLAGS_x86_64_apple_darwin
+ARFLAGS_x86_64_apple_darwin = None
+cargo:rerun-if-env-changed=HOST_ARFLAGS
+HOST_ARFLAGS = None
+cargo:rerun-if-env-changed=ARFLAGS
+ARFLAGS = None
+running: ZERO_AR_DATE="1" "ar" "cq" "/Users/qietv/git/rust/cookbook/build-c/target/debug/build/build-c-158160e484c1cdb8/out/libhellocpp.a" "/Users/qietv/git/rust/cookbook/build-c/target/debug/build/build-c-158160e484c1cdb8/out/src/hello.o"
+exit status: 0
+running: "ar" "s" "/Users/qietv/git/rust/cookbook/build-c/target/debug/build/build-c-158160e484c1cdb8/out/libhellocpp.a"
+exit status: 0
+cargo:rustc-link-lib=static=hellocpp
+cargo:rustc-link-search=native=/Users/qietv/git/rust/cookbook/build-c/target/debug/build/build-c-158160e484c1cdb8/out
+cargo:rerun-if-env-changed=CXXSTDLIB_x86_64-apple-darwin
+CXXSTDLIB_x86_64-apple-darwin = None
+cargo:rerun-if-env-changed=CXXSTDLIB_x86_64_apple_darwin
+CXXSTDLIB_x86_64_apple_darwin = None
+cargo:rerun-if-env-changed=HOST_CXXSTDLIB
+HOST_CXXSTDLIB = None
+cargo:rerun-if-env-changed=CXXSTDLIB
+CXXSTDLIB = None
+cargo:rustc-link-lib=c++
+cargo:rerun-if-changed=src/hello_foo.c
+TARGET = Some("x86_64-apple-darwin")
+OPT_LEVEL = Some("0")
+HOST = Some("x86_64-apple-darwin")
+cargo:rerun-if-env-changed=CC_x86_64-apple-darwin
+CC_x86_64-apple-darwin = None
+cargo:rerun-if-env-changed=CC_x86_64_apple_darwin
+CC_x86_64_apple_darwin = None
+cargo:rerun-if-env-changed=HOST_CC
+HOST_CC = None
+cargo:rerun-if-env-changed=CC
+CC = None
+cargo:rerun-if-env-changed=CRATE_CC_NO_DEFAULTS
+CRATE_CC_NO_DEFAULTS = None
+DEBUG = Some("true")
+CARGO_CFG_TARGET_FEATURE = Some("cmpxchg16b,fxsr,sse,sse2,sse3,sse4.1,ssse3")
+cargo:rerun-if-env-changed=CFLAGS_x86_64-apple-darwin
+CFLAGS_x86_64-apple-darwin = None
+cargo:rerun-if-env-changed=CFLAGS_x86_64_apple_darwin
+CFLAGS_x86_64_apple_darwin = None
+cargo:rerun-if-env-changed=HOST_CFLAGS
+HOST_CFLAGS = None
+cargo:rerun-if-env-changed=CFLAGS
+CFLAGS = None
+running: env -u IPHONEOS_DEPLOYMENT_TARGET "cc" "-O0" "-ffunction-sections" "-fdata-sections" "-fPIC" "-gdwarf-2" "-fno-omit-frame-pointer" "-m64" "-arch" "x86_64" "-Wall" "-Wextra" "-DAPP_NAME=\"QIE_foo\"" "-DVERSION=\"0.1.0\"" "-DWELCOM" "-o" "/Users/qietv/git/rust/cookbook/build-c/target/debug/build/build-c-158160e484c1cdb8/out/src/hello_foo.o" "-c" "src/hello_foo.c"
+exit status: 0
+cargo:rerun-if-env-changed=AR_x86_64-apple-darwin
+AR_x86_64-apple-darwin = None
+cargo:rerun-if-env-changed=AR_x86_64_apple_darwin
+AR_x86_64_apple_darwin = None
+cargo:rerun-if-env-changed=HOST_AR
+HOST_AR = None
+cargo:rerun-if-env-changed=AR
+AR = None
+cargo:rerun-if-env-changed=ARFLAGS_x86_64-apple-darwin
+ARFLAGS_x86_64-apple-darwin = None
+cargo:rerun-if-env-changed=ARFLAGS_x86_64_apple_darwin
+ARFLAGS_x86_64_apple_darwin = None
+cargo:rerun-if-env-changed=HOST_ARFLAGS
+HOST_ARFLAGS = None
+cargo:rerun-if-env-changed=ARFLAGS
+ARFLAGS = None
+running: ZERO_AR_DATE="1" "ar" "cq" "/Users/qietv/git/rust/cookbook/build-c/target/debug/build/build-c-158160e484c1cdb8/out/libhellofooc.a" "/Users/qietv/git/rust/cookbook/build-c/target/debug/build/build-c-158160e484c1cdb8/out/src/hello_foo.o"
+exit status: 0
+running: "ar" "s" "/Users/qietv/git/rust/cookbook/build-c/target/debug/build/build-c-158160e484c1cdb8/out/libhellofooc.a"
+exit status: 0
+cargo:rustc-link-lib=static=hellofooc
+cargo:rustc-link-search=native=/Users/qietv/git/rust/cookbook/build-c/target/debug/build/build-c-158160e484c1cdb8/out

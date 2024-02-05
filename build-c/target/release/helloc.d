@@ -1,0 +1,1 @@
+/Users/qietv/git/rust/cookbook/build-c/target/release/helloc: /Users/qietv/git/rust/cookbook/build-c/build.rs /Users/qietv/git/rust/cookbook/build-c/src/bin/helloc.rs /Users/qietv/git/rust/cookbook/build-c/src/hello.c /Users/qietv/git/rust/cookbook/build-c/src/hello.cpp /Users/qietv/git/rust/cookbook/build-c/src/hello_foo.c
