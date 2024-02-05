@@ -10,7 +10,7 @@ use url::form_urlencoded::{byte_serialize, parse};
  * @Author: idzeir
  * @Date: 2024-02-05 15:03:09
  * @Last Modified by: idzeir
- * @Last Modified time: 2024-02-05 15:05:47
+ * @Last Modified time: 2024-02-05 16:15:06
  */
 fn main() -> Result<(), Box<dyn Error>> {
     percent_encoding()?;
@@ -41,19 +41,19 @@ fn percent_encoding() -> Result<(), Utf8Error> {
 fn url_encoding() {
     let urlencoded = byte_serialize("What is ❤?".as_bytes()).collect::<String>();
     assert_eq!(dbg!(&urlencoded), "What+is+%E2%9D%A4%3F");
-    println!("urlencoded: '{}'", urlencoded);
+    // println!("urlencoded: '{}'", urlencoded);
 
     let decoded = parse(urlencoded.as_bytes())
         .map(|(key, val)| [key, val].concat())
         .collect::<String>();
     assert_eq!(dbg!(&decoded), "What is ❤?");
-    println!("decoded: '{}'", decoded);
+    // println!("decoded: '{}'", decoded);
 
-    println!(
-        "group: {:?} = {:?}",
-        ["AD", "CD", "EA"].concat(),
-        [[1, 2, 3], [4, 6, 3]].concat()
-    );
+    // println!(
+    //     "group: {:?} = {:?}",
+    //     ["AD", "CD", "EA"].concat(),
+    //     [[1, 2, 3], [4, 6, 3]].concat()
+    // );
 }
 
 fn data_encoding() -> Result<(), DecodeError> {
@@ -71,6 +71,7 @@ fn data_encoding() -> Result<(), DecodeError> {
 }
 
 fn base64_encoding() -> Result<(), Box<dyn Error>> {
+    println!("excuting base64 encoding");
     let hello = b"hello rustaceans";
     let encoded = STANDARD.encode(hello);
     let decoded = STANDARD.decode(&encoded)?;
@@ -78,5 +79,6 @@ fn base64_encoding() -> Result<(), Box<dyn Error>> {
     println!("origin: {}", String::from_utf8(hello.to_vec())?);
     println!("base64 encoded: {}", encoded);
     println!("back to origin: {}", String::from_utf8(decoded)?);
+
     Ok(())
 }
