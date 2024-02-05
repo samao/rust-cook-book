@@ -1,1 +1,0 @@
-/Users/qietv/git/rust/cookbook/build-c/target/debug/hellofoo: /Users/qietv/git/rust/cookbook/build-c/build.rs /Users/qietv/git/rust/cookbook/build-c/src/bin/hellofoo.rs /Users/qietv/git/rust/cookbook/build-c/src/hello_foo.c
