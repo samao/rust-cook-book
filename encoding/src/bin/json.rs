@@ -7,7 +7,7 @@ use serde_json::Value;
  * @Author: idzeir
  * @Date: 2024-02-05 16:14:53
  * @Last Modified by: idzeir
- * @Last Modified time: 2024-02-05 16:33:17
+ * @Last Modified time: 2024-02-05 16:59:00
  */
 fn main() -> Result<(), Box<dyn Error>> {
     let a = r#"{
@@ -28,7 +28,7 @@ fn main() -> Result<(), Box<dyn Error>> {
           "admin"
         ]
       }}"#,
-        103609, false
+        203609, false
     );
 
     let b = b.as_str();
@@ -48,5 +48,23 @@ fn main() -> Result<(), Box<dyn Error>> {
         parsed["userid"], parsed["verified"], parsed["access_privileges"]
     );
 
+    // assert_eq!(parsed["userid"], 203609);
+
+    if parsed["verified"] == false {
+        println!("用户验证未通过");
+    }
+
+    match &parsed["userid"].as_u64() {
+        Some(1..=100) => {
+            println!("内部id号，不能外泄");
+        }
+        Some(num @ 1..=1000000) => {
+            println!("老用户id: {}", num);
+        }
+        Some(num) => {
+            println!("userid is: {}", num);
+        }
+        _ => unreachable!(),
+    }
     Ok(())
 }
