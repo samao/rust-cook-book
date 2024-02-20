@@ -1,4 +1,7 @@
-use std::{fs::File, io::Read};
+use std::{
+    fs::{self, File},
+    io::Read,
+};
 
 /*
  * Copyright (c) QieTv, Inc. 2018
@@ -17,6 +20,16 @@ error_chain! {
 }
 
 fn read_uptime() -> Result<u64> {
+    use std::io::Write;
+
+    let mut file = File::create("./proc/downtime")?;
+    write!(file, r#"{{"name": "{}", "age": {}}}"#, "JONE", 35)?;
+    let json = fs::read_to_string("./proc/downtime")?;
+    let json = json
+        .split(&['{', '}', '\"', ':', ',', ' '][..])
+        .filter(|x| !x.is_empty());
+    println!("{:?}", json.collect::<Vec<_>>());
+
     let mut uptime = String::new();
     File::open("./proc/uptime")?.read_to_string(&mut uptime)?;
 
