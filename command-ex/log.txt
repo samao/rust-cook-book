@@ -1,0 +1,12 @@
+total 32
+-rw-r--r--  1 qietv  staff  301 Feb  5 13:41 hello.c
+-rw-r--r--  1 qietv  staff  266 Feb  5 10:48 hello.cpp
+drwxr-xr-x  5 qietv  staff  160 Feb  5 14:31 bin
+-rw-r--r--  1 qietv  staff  144 Feb  5 14:30 hello_foo.c
+-rw-r--r--  1 qietv  staff   45 Feb  5 10:41 main.rs
+
+../build-c/src/bin:
+total 24
+-rw-r--r--  1 qietv  staff  740 Feb  5 14:34 helloc.rs
+-rw-r--r--  1 qietv  staff  288 Feb  5 14:34 hellocpp.rs
+-rw-r--r--  1 qietv  staff  250 Feb  5 14:34 hellofoo.rs
