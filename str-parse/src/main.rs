@@ -22,42 +22,47 @@ fn main() {
 }
 
 fn impl_fromstr() {
-    let color = r"#fa7268";
+    let color = r"#fa7268cc";
 
-    match RGB::from_str(color) {
-        Ok(rgb @ RGB { r, g, b }) => {
+    match RGBA::from_str(color) {
+        Ok(rgb @ RGBA { r, g, b, a }) => {
             println!(
-                "The RGB color is {:?} -> code is R: {}, G: {}, B: {}",
-                rgb, r, g, b
+                "The RGBA color is {:?} -> code is R: {}, G: {}, B: {}, A: {}",
+                rgb, r, g, b, a
             );
         }
         _ => {}
     }
 
     assert_eq!(
-        RGB::from_str("#ff00ff").unwrap(),
-        RGB {
+        RGBA::from_str("#ff00ff01").unwrap(),
+        RGBA {
             r: 255,
             g: 0,
-            b: 255
+            b: 255,
+            a: 1,
         }
     );
+
+    println!("{:?}", RGBA::from_str("#aabbccdd"));
 }
 
 #[derive(Debug, PartialEq)]
-struct RGB {
+struct RGBA {
+    a: u8,
     r: u8,
     g: u8,
     b: u8,
 }
 
-impl FromStr for RGB {
+impl FromStr for RGBA {
     type Err = ParseIntError;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         let r = u8::from_str_radix(&s[1..3], 16)?;
         let g = u8::from_str_radix(&s[3..5], 16)?;
         let b = u8::from_str_radix(&s[5..7], 16)?;
-        Ok(RGB { r, g, b })
+        let a = u8::from_str_radix(&s[7..9], 16)?;
+        Ok(RGBA { r, g, b, a })
     }
 }
