@@ -6,11 +6,15 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+bytes = "1.5.0"
 error-chain = "0.12.4"
+hyper = { version = "1.2.0", features = ["full", "client"] }
 lazy_static = "1.4.0"
 mime = "0.3.17"
 regex = "1.10.3"
-reqwest = "0.11.24"
+reqwest = { version = "0.11.24", features = ["blocking", "json"] }
 select = "0.6.0"
+serde = { version = "1.0.197", features = ["derive"] }
+tempdir = "0.3.7"
 tokio = { version = "1.36.0", features = ["full"] }
 url = "2.5.0"
