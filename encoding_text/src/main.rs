@@ -43,16 +43,6 @@ fn main() {
         // print!("{:0x?}, ", reader.get_u16());
         b16v.push(reader.get_u16())
     }
-    // reader.get_u16();
-    // reader.get_u16();
-    // reader.get_u16();
-    // reader.get_u16();
-    // reader.get_u16();
-    // reader.get_u16();
-    // reader.get_u16();
-    // reader.get_u16();
-    // let first = reader.get_u16();
-
     println!("3.{:0x?}", b16v);
 
     println!("{} == {:?}", expectation, &cow.get(..).unwrap_or(""));
@@ -67,13 +57,28 @@ fn main() {
     println!("{:?}, {}", encoding_used, had_error);
 
     let _slice = ['l', 'o', 'r', 'e', 'm', 'z'].chunks_exact(2);
-    // _slice.filter_map(|e| Some(e));
     println!("剩余: {:?}", _slice.remainder());
     _slice.for_each(|x| println!("{:?}", x));
 
     next(&[1, 2, 3, 4, 5, 6, 7], 2);
 
     next(&[User(8), User(2), User(10), User(7)], 3);
+
+    dbg!(factorial(26));
+}
+
+fn factorial(n: u128) -> Option<u128> {
+    if n <= 1 {
+        return Some(1);
+    }
+    if let Some(a) = factorial(n - 1) {
+        match n.overflowing_mul(a) {
+            (v, false) => return Some(v),
+            (_, true) => return None,
+        }
+    }
+
+    None
 }
 
 #[derive(Debug)]
